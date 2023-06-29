@@ -1,0 +1,14 @@
+
+GET
+URL : http://localhost:3000/brands?brandName=TATA
+
+ var courseList = [
+    {
+     courseName:"Angular",
+     techStack:["HTML","CSS"] 
+    }
+]
+
+courseList[0].techStack
+
+
