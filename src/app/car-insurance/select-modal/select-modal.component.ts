@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from 'src/app/core/services/http.service';
 import { CarInsuranceService } from '../services/car-insurance.service';
 
@@ -12,7 +12,7 @@ export class SelectModalComponent implements OnInit{
   selectedBrand:string | null = null; ;
   modalList:any[] = [] ;
   insuranceData:any;
-  constructor(private activateRoute:ActivatedRoute,private http:HttpService,private carInsSvc:CarInsuranceService){
+  constructor(private activateRoute:ActivatedRoute,private http:HttpService,private carInsSvc:CarInsuranceService,private router:Router){
     this.selectedBrand = this.activateRoute.snapshot.paramMap.get('brandName');
     this.insuranceData = this.carInsSvc.carInsuranceModal;
   }
@@ -36,8 +36,9 @@ export class SelectModalComponent implements OnInit{
     })
   }
 
-  selectModal(modal:any){
-    this.insuranceData.modelName = modal;
+  selectModal(model:any){
+    this.insuranceData.modelName = model;
+    this.router.navigate(['/car-insurance/select-variant',model]);
   }
 
 }

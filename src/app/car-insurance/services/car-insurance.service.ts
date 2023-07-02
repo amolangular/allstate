@@ -5,10 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class CarInsuranceService {
 
-  carInsuranceModal:CarInsurance = {
+  carInsuranceModal:any = {
     "brandName":"",
     "modelName":"",
     "variantName":"",
+    "selectedPlan":{
+       "planInfo":{},
+       "costCoverage":{
+        "netPremium":0,
+        "thirdPartyPremium":0,
+        "ownDamagePremium":0,
+        "addOnsPremium":0,
+        "ncbDiscount":0,
+       }
+    }
   }
  
   constructor() { }

@@ -1,10 +1,18 @@
-<div class="container mt-3 text-left">
-   <div class="row">
-     <div class="col-12"> 
+<div class="container mt-3 text-left  w-75 my-4">
+
+  <img class="img-fluid mt-3 w-50 h-50" src="https://d2h44aw7l5xdvz.cloudfront.net/assets/img/cardesktop.svg" alt="">
+   <div class="row border rounded mt-3">
+     <div class="col-12 mt-1"> 
        <span class="text-muted mx-2"> Car Name </span> : <span class="text-muted"> {{insuranceData.brandName}} </span> <span class="mx-2" routerLink="/car-insurance"><i class="bi bi-pencil-square editBtn"></i></span>
      </div>
+     <hr class="horizontal">
      <div class="col-12"> 
-        <span class="text-muted mx-2"> Model Name </span> : <span class="text-muted"> {{insuranceData.modelName}} </span>
+        <span class="text-muted mx-2"> Model Name </span> : <span class="text-muted"> {{insuranceData.modelName}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-modal',insuranceData.brandName]"><i class="bi bi-pencil-square editBtn"></i></span>
       </div>
+      <hr class="horizontal">
+      <div class="col-12"> 
+        <span class="text-muted mx-2"> Variant Name </span> : <span class="text-muted"> {{insuranceData.variantName}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-variant',insuranceData.modelName]"><i class="bi bi-pencil-square editBtn"></i></span>
+      </div>
+      <hr class="horizontal">
    </div>
 </div>

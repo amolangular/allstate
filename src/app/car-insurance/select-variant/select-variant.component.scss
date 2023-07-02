@@ -1,0 +1,15 @@
+.active{
+    border-bottom: 4px solid #fb0;
+    border-bottom-color: #fb0 !important;
+}
+
+.list-group-flush>.list-group-item {
+    padding-left: 0px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.variant-list{
+    height: 400px;
+    overflow-y: auto;
+}
