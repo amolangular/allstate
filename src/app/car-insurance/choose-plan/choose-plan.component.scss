@@ -7,3 +7,15 @@
     height: 400px;
     overflow-y: auto;
 }
+
+.cost-breakUp{
+    margin: 8px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+hr{
+    margin: 0px !important;
+    // width: 75%;
+    margin: auto;
+}

@@ -16,4 +16,13 @@
       </ul>
 </div>
 
-<router-outlet></router-outlet>
+<!-- <div class="z-1 position-relative"> -->
+  <router-outlet></router-outlet>
+<!-- </div> -->
+
+<div class="container w-50 py-3 mb-3 border rounded shadow sticky-bottom" *ngIf="router.url === '/car-insurance/choose-plan'">
+  <div class="total-pay">
+     <span class="fw-bold fs-6">₹{{totalPremiumReceived | async}}</span>
+     <button class="btn btn-warning" routerLink="/car-insurance/personal-details">Continue</button>
+  </div>
+</div>

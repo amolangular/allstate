@@ -6,6 +6,7 @@ import { SelectModalComponent } from './select-modal/select-modal.component';
 import { SelectVariantComponent } from './select-variant/select-variant.component';
 import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
 import { ChoosePlanComponent } from './choose-plan/choose-plan.component';
+import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
       {path:'select-modal/:brandName',component:SelectModalComponent},
       {path:'select-variant/:modelName',component:SelectVariantComponent},
       {path:'registration-details',component:RegistrationDetailsComponent},
-      {path:'choose-plan',component:ChoosePlanComponent}
+      {path:'choose-plan',component:ChoosePlanComponent},
+      {path:'personal-details',component:PersonalDetailsComponent}
     ]
   },
 ];

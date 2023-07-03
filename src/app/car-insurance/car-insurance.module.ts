@@ -11,6 +11,7 @@ import { SelectVariantComponent } from './select-variant/select-variant.componen
 import { SharedModule } from '../shared/shared.module';
 import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
 import { ChoosePlanComponent } from './choose-plan/choose-plan.component';
+import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ChoosePlanComponent } from './choose-plan/choose-plan.component';
     SelectVariantComponent,
     RegistrationDetailsComponent,
     ChoosePlanComponent,
+    PersonalDetailsComponent,
   ],
   imports: [
     CommonModule,

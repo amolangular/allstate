@@ -9,10 +9,21 @@
      </div>
    </div>
    <div class="row w-75 mx-auto mt-2">
+     <div class="col-md-6 me-2 border mt-2 rounded py-2">
+      <label for="customRange1" class="form-label fw-bold">Insured Value(IDV)</label>
+      <p class="fw-bold">₹{{insuranceData.selectedPlan.selectedIdv}}</p>
+      <input type="range" class="form-range" id="customRange1" [(ngModel)]="insuranceData.selectedPlan.selectedIdv" [min]="selectedPlanInfo?.vehicle?.vehicleIDV?.minimumIdv" [max]="selectedPlanInfo?.vehicle?.vehicleIDV?.maximumIdv">
+      <p class="d-flex justify-content-between">
+        <span class="text-muted">₹{{selectedPlanInfo?.vehicle?.vehicleIDV?.minimumIdv}}</span>
+        <span class="text-muted">₹{{selectedPlanInfo?.vehicle?.vehicleIDV?.maximumIdv}}</span>
+      </p>
+     </div>
+   </div>
+   <div class="row w-75 mx-auto mt-2">
      <div class="col-md-6 me-2 border mt-2 scroll rounded">
         <p class="my-1 fs-6 text-muted">Add Extra Coverage (Valid for 1 year only)</p>
-        <div class="form-check mt-4" *ngFor="let coverage of addOnCoverageList[0]?.subCovers">
-            <input class="form-check-input checkbox" type="checkbox" value="" id="flexCheckDefault" [(ngModel)]="coverage.selection">
+        <div class="form-check mt-4" *ngFor="let coverage of addOnCoverageList[0]?.subCovers;let i=index">
+            <input class="form-check-input checkbox" type="checkbox" value="" id="flexCheckDefault" [(ngModel)]="coverage.selection" (ngModelChange)="caculateAddOnCoverage(coverage.selection,i)">
             <label class="form-check-label fs-6" for="flexCheckDefault">
               {{coverage.name}}
             </label>
@@ -25,27 +36,38 @@
             <div class="col-md-12 border rounded-end">
                 <app-insurance-details [insuranceData]="insuranceData"></app-insurance-details>
             </div>
-            <div class="col-md-12 mt-2 border rounded p-2">
+            <div class="col-md-12 mt-2 border rounded p-2 mb-5">
                 <p class="fw-bold">Cost Breakup</p>
-            
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-<!--                
-               <hr>
-              
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-                
+                 
+                <div class="cost-breakUp" *ngIf="selectedPlan != 'ThirdPartyCover'">
+                  <span>Own Damage Premium</span>
+                  <span>₹{{insuranceData.selectedPlan.costCoverage.ownDamagePremium}}</span>
+                </div> 
                 <hr>
-               
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-              
+                <div class="cost-breakUp">
+                  <span>Third Party Premium</span>
+                  <span> ₹{{insuranceData.selectedPlan.costCoverage.thirdPartyPremium}}</span>
+                </div>
+                <hr> 
+                <div class="cost-breakUp"  *ngIf="selectedPlan != 'ThirdPartyCover'">
+                  <span>Pay As You Drive Discount</span>
+                  <span>₹0</span>
+                </div> 
                 <hr>
-            
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-                -->
+                <div class="cost-breakUp">
+                  <span>Add-Ons Premium</span>
+                  <span>₹{{insuranceData.selectedPlan.costCoverage.addOnsPremium}}</span>
+                </div> 
+                <hr>
+                <div class="cost-breakUp" *ngIf="selectedPlan != 'ThirdPartyCover'">
+                  <span>NCB Discount</span>
+                  <span>- ₹{{insuranceData.selectedPlan.costCoverage.ncbDiscount}}</span>
+                </div> 
+                <hr>
+                <div class="cost-breakUp">
+                  <span><b>Net Premium</b></span>
+                  <span>₹{{insuranceData.selectedPlan.costCoverage.netPremium}}</span>
+                </div>  
             </div>
         </div>
      </div>
