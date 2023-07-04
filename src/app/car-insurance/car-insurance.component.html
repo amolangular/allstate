@@ -20,9 +20,11 @@
   <router-outlet></router-outlet>
 <!-- </div> -->
 
-<div class="container w-50 py-3 mb-3 border rounded shadow sticky-bottom" *ngIf="router.url === '/car-insurance/choose-plan'">
+<div class="row home-container py-3 mb-3 border rounded shadow sticky-bottom" *ngIf="router.url === '/car-insurance/choose-plan' || router.url === '/car-insurance/personal-details'">
   <div class="total-pay">
      <span class="fw-bold fs-6">₹{{totalPremiumReceived | async}}</span>
-     <button class="btn btn-warning" routerLink="/car-insurance/personal-details">Continue</button>
+     <button class="btn btn-warning" *ngIf="router.url != '/car-insurance/personal-details'" routerLink="/car-insurance/personal-details">Continue</button>
+
+     <button class="btn btn-warning" type="button" (click)="payNow()" *ngIf="router.url == '/car-insurance/personal-details'" routerLink="/car-insurance/personal-details">Pay</button>
   </div>
 </div>

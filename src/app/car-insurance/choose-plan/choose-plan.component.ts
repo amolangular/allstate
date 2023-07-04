@@ -41,7 +41,8 @@ export class ChoosePlanComponent implements OnInit{
     //get selecdtedplan info
    this.selectedPlanInfo = this.planInfo.plans.filter((el:any)=> el.planName == plan)[0];
      if(this.selectedPlanInfo && this.selectedPlanInfo.contract != null && this.selectedPlanInfo.contract.coverages.length > 0){
-       this.addOnCoverageList = this.selectedPlanInfo.contract.coverages.filter((obj:any)=> obj.coverType === 'ADDONS');
+      let addOnList = this.selectedPlanInfo.contract.coverages.filter((obj:any)=> obj.coverType === 'ADDONS');
+      this.addOnCoverageList = JSON.parse(JSON.stringify(addOnList));
        console.log("addOn" ,this.addOnCoverageList);
      }
     
@@ -54,7 +55,7 @@ export class ChoosePlanComponent implements OnInit{
   this.insuranceData.selectedPlan.costCoverage.ownDamagePremium = 0 ;
   this.insuranceData.selectedPlan.costCoverage.ncbDiscount = 0 ;
   this.insuranceData.selectedPlan.costCoverage.thirdPartyPremium = 0 ;
-   
+  this.insuranceData.selectedPlan.costCoverage.addOnsPremium = 0 ;
   //extracting own damage coverage
    let ownCoverage = planObj.contract.coverages.filter((el:any)=> (el.coverType === "OWN_DAMAGE"))[0];
     if(ownCoverage){

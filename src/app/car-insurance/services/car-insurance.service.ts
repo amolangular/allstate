@@ -28,6 +28,14 @@ export class CarInsuranceService {
     },
     "registration-details":{
       
+    },
+    "personal-details":{
+      "owner-details":{
+
+      },
+      "car-details":{
+        
+      }
     }
   }
  
