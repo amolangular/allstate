@@ -1,53 +1,102 @@
-<div class="container mt-1 w-75">
-   <div class="row w-75 mx-auto">
-     <div class="col-md-3 me-3 border rounded cursor-pointer" *ngFor="let plan of planInfo?.plans" (click)="setPlan(plan.planName)" [ngClass]="plan.planName === selectedPlan ? 'border-warning border-2':''">
-        <div class="d-flex align-items-start flex-column mb-3" style="height: 180px;">
-            <div class="p-2 fs-6 fw-bold">{{plan.planName}}</div>
-            <div class="p-2 mb-auto fs-6 text-muted">{{plan.planDes}}</div>
-            <div class="p-2 fw-bold">₹{{plan.netPremium}}</div>
+<div class="container mt-1 w-100">
+    <div class="row w-75 mt-4 mx-auto">
+        <div class="col-md-3 me-3 border rounded cursor-pointer" *ngFor="let plan of planInfo?.plans"
+            (click)="setPlan(plan.planName)" [ngClass]="
+        plan.planName === selectedPlan ? 'border-warning border-2' : ''
+      ">
+            <div class="d-flex align-items-start flex-column mb-3" style="height: 180px">
+                <div class="p-2 fs-6 fw-bold">{{ plan.planName }}</div>
+                <div class="p-2 mb-auto fs-6 text-muted">{{ plan.planDes }}</div>
+                <div class="p-2 fw-bold">₹{{ plan.netPremium }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-6 mt-2 d-flex justify-content-end ms-1">
+        <div class="range-meter border" style="width: 490px">
+            <span class="min fs-6 fw-bold">Insured Value (IDV)</span>
+            <div class="fs-6 mb-3">{{ value | currency : "INR" }}</div>
+            <input type="range" class="form-range" [(ngModel)]="value" [min]="min" [max]="max" [value]="defaultValue" />
+            <div class="values d-flex justify-content-between">
+                <span class="max values">{{ min | currency : "INR" }}</span>
+                <span class="max values">{{ max | currency : "INR" }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add-Ons -->
+    <div class="row w-75 mx-auto mt-2">
+        <div class="col-md-6 me-2 border mt-2 scroll rounded">
+            <p class="my-1 fs-6 text-muted">
+                Add Extra Coverage (Valid for 1 year only)
+            </p>
+            <div class="form-check mt-4" *ngFor="let coverage of addOnCoverageList[0]?.subCovers; let i=index">
+                <input class="form-check-input checkbox" type="checkbox" value="" id="flexCheckDefault"
+                    [(ngModel)]="coverage.selection" (ngModelChange)="calculateAddOnsCoverage(coverage.selection,i)" />
+                <label class="form-check-label fs-6" for="flexCheckDefault">
+                    {{ coverage.name }}
+                </label>
+                <p>
+                    <span class="fw-bold fs-6 ms-3">₹{{ coverage.netPremium }}</span>
+                </p>
+                <hr class="mt-1" />
+            </div>
+        </div>
+        <div class="col-md-5 me-2 mt-2">
+            <div class="row">
+                <div class="col-md-12 border rounded-end">
+                    <app-insurance-details [insuranceData]="insuranceData"></app-insurance-details>
+                </div>
+
+                <!-- Cost brakeup -->
+                <div class="col-md-12 mt-2 border rounded p-2">
+                    <app-cost-brakeup [insuranceData]="insuranceData"></app-cost-brakeup>
+                    <!--
+          <p class="fw-bold">Cost Breakup</p>
+
+          <div style="height: 15px" class="fw-light">
+            <span>Third party premium: </span>
+            <span class="float-end">{{
+              premiumCharge | currency : "INR"
+            }}</span>
           </div>
-     </div>
-   </div>
-   <div class="row w-75 mx-auto mt-2">
-     <div class="col-md-6 me-2 border mt-2 scroll rounded">
-        <p class="my-1 fs-6 text-muted">Add Extra Coverage (Valid for 1 year only)</p>
-        <div class="form-check mt-4" *ngFor="let coverage of addOnCoverageList[0]?.subCovers">
-            <input class="form-check-input checkbox" type="checkbox" value="" id="flexCheckDefault" [(ngModel)]="coverage.selection">
-            <label class="form-check-label fs-6" for="flexCheckDefault">
-              {{coverage.name}}
-            </label>
-            <p><span class="fw-bold fs-6 ms-3">₹{{coverage.netPremium}}</span></p>
-            <hr class="mt-1">
-        </div>
-     </div>
-     <div class="col-md-5 me-2 mt-2">
-         <div class="row">
-            <div class="col-md-12 border rounded-end">
-                <app-insurance-details [insuranceData]="insuranceData"></app-insurance-details>
-            </div>
-            <div class="col-md-12 mt-2 border rounded p-2">
-                <p class="fw-bold">Cost Breakup</p>
-            
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-<!--                
-               <hr>
-              
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-                
-                <hr>
-               
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-              
-                <hr>
-            
-                    <div class="float-start">Third Party Premium</div>
-                    <div class="float-end">2000</div>
-                -->
+          <hr />
+          <div style="height: 15px" class="fw-light">
+            <span>Own Damage premium: </span>
+            <span class="float-end">{{ 5549 | currency : "INR" }}</span>
+          </div>
+          <hr />
+          <div style="height: 15px" class="fw-light">
+            <span>Pay As You Drive Discount: </span>
+            <span class="float-end">{{ -5549 | currency : "INR" }}</span>
+          </div>
+          <hr />
+          <div style="height: 15px" class="fw-light">
+            <span>Add-Ons premium: </span>
+            <span class="float-end">{{ 0 | currency : "INR" }}</span>
+          </div>
+          <hr />
+          <div style="height: 15px" class="fw-light">
+            <span>NCB Discount: </span>
+            <span class="float-end text-decoration-line-through">{{
+              540 | currency : "INR"
+            }}</span>
+          </div>
+          <hr />
+          <div>
+            <span class="fs-4 fw-medium">Net Premium: </span>
+            <span class="float-end fs-4 fw-medium">{{
+              netCharge | currency : "INR"
+            }}</span>
+          </div>
+          <hr />
+          <span
+            class="float-end text-muted fs-6 fw-lighter"
+            style="margin-top: 0px"
+            >The price excluding 18% GST</span
+          >
+        </div> -->
+                </div>
             </div>
         </div>
-     </div>
-   </div>
-</div>
+    </div>

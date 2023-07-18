@@ -1,15 +1,86 @@
 <div class="container w-75 mt-1">
     <div class="row">
         <div class="col-md-6 border rounded-start">
-            <label for="id1" class="form-label labelClass ms-1 fs-6 fw-bold">When Was the Car Registred ?</label>
-            <input type="text" class="form-control modal-input ms-1" id="id1" placeholder="Search Make"
-                [(ngModel)]="insuranceData.modelName">
-                
+             <!-- For year Selection -->
+             <label class="form-label mt-3">
+                 <h3>Which year your car was bought?</h3>
+             </label>
 
-             <button class="btn btn-primary" routerLink="/car-insurance/choose-plan">Continue</button>   
+             <div class="form-check form-switch ms-4 mb-4" *ngIf="!citySelected">
+                 <input class="form-check-input" (click)="onBrandNewCar($event)" type="checkbox" id="brandNewSwitch">
+                 <label class="form-check-label fw-bolder" for="brandNewSwitch">It is a brand new Car</label>
+               </div>
+
+             <div class="row" *ngIf="!yearSelected">
+                <input type="text" class="form-control mx-3 mb-3" style="width: 573px;" [(ngModel)]="yearSelected">
+                <div class="col-md-6">
+                    <div class="list-group">
+                        <a *ngFor="let year of yearList.slice(0, getMidPoint())"
+                            class="list-group-item list-group-item-action m-1 shadow border rounded fw-bolder"
+                            (click)="showMonths(year)">{{ year }}</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="list-group">
+                        <a *ngFor="let year of yearList.slice(getMidPoint())"
+                            class="list-group-item list-group-item-action m-1 shadow border rounded fw-bolder pe-auto"
+                            (click)="showMonths(year)">{{ year }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- For Month Selection -->
+            <div class="col-md-12">
+                <div class="list-group" *ngIf="yearSelected && !monthSelected">
+                    <label class="form-label mt-3">
+                        <h3>When was the car registered</h3>
+                    </label>
+                    <input type="text" class="form-control" [(ngModel)]="monthSelected">
+                    <a class="list-group-item list-group-item-action m-1 shadow border rounded fw-bolder pe-auto"
+                        *ngFor="let month of monthList" (click)="getMonth(month)">{{month}}</a>
+                </div>
+            </div>
+
+            <!-- For City Selection -->
+            <div class="col-md-12">
+                <div class="list-group" *ngIf="monthSelected && !citySelected">
+                    <label class="form-label mt-3">
+                        <h3>Select city where it was registered</h3>
+                    </label>
+                    <input type="text" class="form-control" [(ngModel)]="citySelected">
+                    <a class="list-group-item list-group-item-action m-1 shadow border rounded fw-bolder pe-auto"
+                        *ngFor="let city of cityList" (click)="getCity(city)">{{city}}</a>
+                </div>
+            </div>
+
+            <!-- For Policy Expiration -->
+            <div class="col-md-12 mt-4">
+                <div class="" *ngIf="citySelected">
+                    <label class="form-label mt-3">
+                        <h3>When will your policy expires?</h3>
+                    </label>
+                    <label for="3rdparty" class="form-label mt-2">Enter third-party policy expiry date</label>
+                    <input type="date" id="3rdparty" class="form-control mb-4" [(ngModel)]="thirdPartyPolicyExp" (change)="getThirdPartyExpDate(thirdPartyPolicyExp)">
+
+                    <!-- Toggle option -->
+                    <div class="form-check form-switch" *ngIf="thirdPartyPolicyExp">
+                        <input class="form-check-input"  type="checkbox" role="switch" id="brandNewSwitch" (change)="onToggle($event)">
+                        <label class="form-check-label mb-3" for="brandNewSwitch">Same as third-party</label>
+                    </div>
+
+                    <label for="own" class="form-label">Enter own damage expiry date</label>
+                    <input type="date" id="own" class="form-control" [(ngModel)]="ownDamagePolicyExp" [disabled]="sameExpiryDate" (change)="getOwnDamageExpDate(ownDamagePolicyExp)">
+
+                    <div class="d-grid gap-2 w-100 mt-4 col-6 mx-auto">
+                        <button class="btn btn-warning" type="button" routerLink="/car-insurance/choose-plan">Continue</button>
+                      </div>
+                </div>
+            </div>
         </div>
+
         <div class="col-md-6 border rounded-end">
             <app-insurance-details [insuranceData]="insuranceData"></app-insurance-details>
         </div>
     </div>
-</div>
+
+</div>         

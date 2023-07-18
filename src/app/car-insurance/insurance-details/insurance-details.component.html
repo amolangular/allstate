@@ -1,4 +1,4 @@
-<div class="container mt-3 text-left  w-75 my-4">
+<div class="container mt-3 text-left   w-100 my-4">
 
   <img class="img-fluid mt-3 w-50 h-50" src="https://d2h44aw7l5xdvz.cloudfront.net/assets/img/cardesktop.svg" alt="">
    <div class="row border rounded mt-3">
@@ -12,6 +12,26 @@
       <hr class="horizontal">
       <div class="col-12"> 
         <span class="text-muted mx-2"> Variant Name </span> : <span class="text-muted"> {{insuranceData.variantName}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-variant',insuranceData.modelName]"><i class="bi bi-pencil-square editBtn"></i></span>
+      </div>
+      <hr class="horizontal">
+      <div class="col-12"> 
+        <span class="text-muted mx-2"> Registration Year </span> : <span class="text-muted"> {{insuranceData.registrationInfo.registrationYear}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-variant',insuranceData.modelName]"><i class="bi bi-pencil-square editBtn"></i></span>
+      </div>
+      <hr class="horizontal">
+      <div class="col-12"> 
+        <span class="text-muted mx-2"> Registration Month </span> : <span class="text-muted"> {{insuranceData.registrationInfo.registrationMonth}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-variant',insuranceData.modelName]"><i class="bi bi-pencil-square editBtn"></i></span>
+      </div>
+      <hr class="horizontal">
+      <div class="col-12"> 
+        <span class="text-muted mx-2"> Registration City  </span> : <span class="text-muted"> {{insuranceData.registrationInfo.registrationCity}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-variant',insuranceData.modelName]"><i class="bi bi-pencil-square editBtn"></i></span>
+      </div>
+      <hr class="horizontal">
+      <div class="col-12"> 
+        <span class="text-muted mx-2"> Third-Party Expiry Date </span> : <span class="text-muted"> {{insuranceData.registrationInfo.thirdPartyExpiryDate}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-variant',insuranceData.modelName]"><i class="bi bi-pencil-square editBtn"></i></span>
+      </div>
+      <hr class="horizontal">
+      <div class="col-12"> 
+        <span class="text-muted mx-2"> Own Damage Expiry Date </span> : <span class="text-muted"> {{insuranceData.registrationInfo.ownDamageExpiryDate}} </span> <span class="mx-2" [routerLink]="['/car-insurance/select-variant',insuranceData.modelName]"><i class="bi bi-pencil-square editBtn"></i></span>
       </div>
       <hr class="horizontal">
    </div>

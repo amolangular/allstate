@@ -14,7 +14,11 @@ export class SelectVariantComponent implements OnInit {
   variantList: any[] = [];
   insuranceData: any;
   selectedVariant: string = "";
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpService, private carInsSvc: CarInsuranceService,private router:Router) {
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private http: HttpService, 
+    private carInsSvc: CarInsuranceService,
+    private router:Router) {
     this.selectedModel = this.activatedRoute.snapshot.paramMap.get('modelName');
     this.insuranceData = this.carInsSvc.carInsuranceModal;
   }

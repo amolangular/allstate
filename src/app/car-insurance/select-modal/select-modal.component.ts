@@ -12,33 +12,40 @@ export class SelectModalComponent implements OnInit{
   selectedBrand:string | null = null; ;
   modalList:any[] = [] ;
   insuranceData:any;
-  constructor(private activateRoute:ActivatedRoute,private http:HttpService,private carInsSvc:CarInsuranceService,private router:Router){
-    this.selectedBrand = this.activateRoute.snapshot.paramMap.get('brandName');
-    this.insuranceData = this.carInsSvc.carInsuranceModal;
+  constructor(
+    private activateRoute:ActivatedRoute,
+    private http:HttpService,
+    private carInsSvc:CarInsuranceService,
+    private router:Router){
+      this.selectedBrand = this.activateRoute.snapshot.paramMap.get('brandName');
+      this.insuranceData = this.carInsSvc.carInsuranceModal;
+      
+    }
+    
+    ngOnInit(): void {
+      this.getModalList();
+      this.carInsSvc.setBasicDetailsCompleted(true);
   }
   
-  ngOnInit(): void {
-    this.getModalList();
-  }
-
   getModalList(){
     const endPoint = 'brands?'+'brandName='+this.selectedBrand;
     this.http.getDataFromServer(endPoint).subscribe((resp:any)=>{
       if(resp && resp.length > 0){
-       this.modalList = resp[0].models;
-       console.log('list',this.modalList);
+        this.modalList = resp[0].models;
+        console.log('list',this.modalList);
       }
       console.log(resp);
     },
     
     error=>{
-
+      
     })
   }
-
+  
   selectModal(model:any){
     this.insuranceData.modelName = model;
     this.router.navigate(['/car-insurance/select-variant',model]);
+    
   }
 
 }

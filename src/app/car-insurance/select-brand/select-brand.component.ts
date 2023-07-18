@@ -33,10 +33,14 @@ export class SelectBrandComponent {
   insuranceData:any;
   constructor(private carInsService:CarInsuranceService,private router:Router){
      this.insuranceData = this.carInsService.carInsuranceModal;
+
   }
 
   selectBrand(name:string){
     this.insuranceData.brandName = name ;
-    this.router.navigate(['/car-insurance/select-modal',name]);
+    this.router.navigate(['/car-insurance/select-modal',name]);  
+
+    this.carInsService.setBasicDetailsCompleted(true);
+    this.carInsService.updateProgress();
   }
 }

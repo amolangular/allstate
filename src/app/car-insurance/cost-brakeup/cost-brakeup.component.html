@@ -1,0 +1,42 @@
+<div class="col-md-12 mt-2 border rounded p-2 mb-5">
+    <p class="fw-bold">Cost Breakup</p>
+     
+    <div class="cost-breakUp">
+      <span>Own Damage Premium</span>
+      <span class="float-end">₹{{insuranceData.selectedPlan.costCoverage.ownDamagePremium}}</span>
+    </div> 
+    <hr>
+    <div class="cost-breakUp">
+      <span>Third Party Premium</span>
+      <span class="float-end"> ₹{{insuranceData.selectedPlan.costCoverage.thirdPartyPremium}}</span>
+    </div>
+    <hr> 
+    <div class="cost-breakUp" >
+      <span>Pay As You Drive Discount</span>
+      <span class="float-end">₹0</span>
+    </div> 
+    <hr>
+    <div class="cost-breakUp">
+      <span>Add-Ons Premium</span>
+      <span class="float-end">₹{{insuranceData.selectedPlan.costCoverage.addOnsPremium}}</span>
+    </div> 
+    <hr>
+    <div class="cost-breakUp">
+      <span>NCB Discount</span>
+      <span class="float-end">- ₹{{insuranceData.selectedPlan.costCoverage.ncbDiscount}}</span>
+    </div> 
+    <hr>
+    <div class="cost-breakUp" *ngIf="router.url == '/car-insurance/personal-info'">
+      <span>GST (18%)</span>
+      <span class="float-end" >₹{{(insuranceData.selectedPlan.costCoverage.gstAmount)}}</span>
+      <hr>
+    </div> 
+    <div class="cost-breakUp" *ngIf="router.url != '/car-insurance/personal-info'">
+      <span><b>Net Premium</b></span>
+      <span class="float-end">₹{{insuranceData.selectedPlan.costCoverage.netPremium}}</span>
+    </div> 
+    <div class="cost-breakUp" *ngIf="router.url == '/car-insurance/personal-info'">
+      <span><b>Final Premium</b></span>
+      <span class="float-end">₹{{insuranceData.selectedPlan.costCoverage.totalAmount}}</span>
+    </div>  
+</div>

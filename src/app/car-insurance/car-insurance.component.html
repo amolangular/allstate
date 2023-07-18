@@ -1,19 +1,33 @@
 <div class="container-fluid p-2 mt-1 shadow-sm d-flex">
-    <h6 class="text-end me-2 mt-2">AllState</h6>
-    <ul class="nav flex-grow-1 justify-content-between">
-        <li class="nav-item">
-          <a class="nav-link active text-muted" aria-current="page">1.Basic Details</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-muted">2.Choose Plan</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-muted">3.Personal Details</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-muted">4.Payment</a>
-        </li>
-      </ul>
+  <h6 class="text-end me-2 mt-2">AllState</h6>
+  <ul class="nav flex-grow-1 justify-content-between">
+    <li class="nav-item">
+      <a class="nav-link active text-muted" aria-current="page">1.Basic Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-muted">2.Choose Plan</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-muted">3.Personal Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-muted">4.Payment</a>
+    </li>
+  </ul>
+  
 </div>
+<app-progress-bar></app-progress-bar>
+
 
 <router-outlet></router-outlet>
+
+<div class="container w-50 py-4 border rounded shadow sticky-bottom"
+  *ngIf="router.url === '/car-insurance/choose-plan' || router.url === '/car-insurance/personal-info'">
+  <div >
+    <span class="fs-4 fw-bolder">₹{{totalPremiumReceived | async }}</span>
+    <button class="btn btn-warning w-25 py-3 mt-0 float-end"
+      routerLink="/car-insurance/personal-info" *ngIf="router.url != '/car-insurance/personal-info'" >Continue</button>
+    <button class="btn btn-warning w-25 py-3 mt-0 float-end" 
+      routerLink="/car-insurance/personal-info" (click)="payNow()" *ngIf="router.url == '/car-insurance/personal-info'">Pay</button>
+  </div>
+</div>
